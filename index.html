@@ -1,305 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            text-align: center;
-        }
-
-        input {
-            font-size: 1.5em;
-            margin-left: 1em;
-            cursor: pointer;
-        }
-
-        input#switch {
-            background-color: rgb(30, 60, 0);
-            color: rgb(100, 200, 50);
-        }
-
-        #currentTime {
-            padding: 10px 5px;
-            background-color: red;
-            color: aliceblue;
-            font-size: 2em;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        #logo {
-            padding: 10px 5px;
-            background-color: green;
-            color: aliceblue;
-            font-size: 2em;
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-		div#UI{
-		 position: relative ;
-		 top: 3em ;
-		 padding:10px;
-		 height:833;
-		}
-		div#stage p{
-		 background-color: blue ;
-		 color: white ;
-		 padding: 1px 3px ;
-		 margin: 10px ;
-		 font-size: 1.5em;
-		 cursor: pointer;
-		}
-		div#stage p:hover{
-		background-color: lightblue ;
-		}
-    </style>
-    <script src="ks.js">
-    </script>
-</head>
-
-<body>
-    <div id="currentTime"></div>
-    <div id="logo"></div>
-    <div id="stage">
-        <video id="video" controls></video>
-        <audio id="audio" ></audio>
-    </div>
-    <div id="UI">
-        <input type="button" value="pre" id="pre">
-        <input type="button" value="play" id="play">
-        <input type="button" value="stop" id="stop">
-        <input type="button" value="next" id="next">
-        <input type="button" value="切换媒体" id="switch">
-    </div>
-</body>
-
-<script>
-    /*****定义全局变量*****/
-
-	//开启同步代码
-    var Model = {};
-    Model.i = 0;
-    Model.isVideo = true;
-  
-    Model.UI = {};
-    Model.UI.stageDom = document.getElementById("stage");
-    Model.UI.videoDom = document.getElementById("video");
-    Model.UI.audioDom = document.getElementById("audio");
-    Model.UI.preDom = document.getElementById("pre");
-    Model.UI.playDom = document.getElementById("play");
-    Model.UI.stopDom = document.getElementById("stop");
-    Model.UI.nextDom = document.getElementById("next");
-    Model.UI.logoDom = document.getElementById("logo");
-    Model.UI.timeDom = document.getElementById("currentTime");
-    Model.UI.switchDom = document.getElementById("switch");
-
-    Model.UI.videoDom.videoLength = mediaData.videoFiles.length;
-    Model.UI.audioDom.audioLength = mediaData.audioFiles.length;
-
-    Model.UI.videoDom.getURL = function () {
-        return mediaData.videoPath + mediaData.videoFiles[Model.i];
-    }
-    Model.UI.audioDom.getURL = function () {
-        return mediaData.audioPath + mediaData.audioFiles[Model.i];
-    }
-
-      // 第七次作业更新任务1— — — —全屏播放视频
-    // 1.1定义windowsWidth,将文档浏览器的宽度赋值给它
-    Model.windowsWidth = document.body.clientWidth;
-    // 1.2再将windowsWidth赋值给视频的宽度，达成全屏播放视频的效果
-    Model.UI.stageDom.style.width = Model.windowsWidth + 'px';
-    Model.UI.videoDom.style.width = Model.windowsWidth + 'px';
-    Model.UI.audioDom.style.width = Model.windowsWidth + 'px';
-    Model.UI.stageDom.style.height = Model.UI.videoDom.clientHeight  + 'px';
-
-    // 第七次作业更新任务2— — — —logo设置
-    // 2.2 修改logo内容
-    Model.showMediaNum = function (i) {
-        let length = null;
-        if (Model.isVideo) {
-            length = Model.UI.videoDom.videoLength;
-        } else {
-            length = Model.UI.audioDom.audioLength;
-        }
-       Model.UI.logoDom.textContent = "NO." + (i + 1) + "/" + length;
-    }
-    // 2.3初始化 Model.i=0
-    Model.showMediaNum(0);
-
-    // 展示时间进度条
-    Model.showTimeUI = function () {
-        let content;
-        if (Model.isVideo) {
-            content = parseInt(Model.UI.videoDom.currentTime) + " s" + "/" + parseInt(Model.UI.videoDom.duration) + " s";
-        } else {
-            content = parseInt(Model.UI.audioDom.currentTime) + " s" + "/" + parseInt(Model.UI.audioDom.duration) + " s";
-        }
-        Model.UI.timeDom.textContent = content;
-    };
-	    // 切换媒体类型的函数
-    Model.switchMediaDom = function () {
-        if (Model.isVideo) {
-            Model.UI.stageDom.removeChild(Model.UI.videoDom);
-            Model.UI.stageDom.appendChild(Model.UI.audioDom);
-        } else {
-            Model.UI.stageDom.removeChild(Model.UI.audioDom);
-            Model.UI.stageDom.appendChild(Model.UI.videoDom);
-        }
-    } ;
-
-    Model.createAudioMenu = function(){
-	  let pDom ;
-	  for(let i=0;i<6;i++){
-	     pDom = document.createElement("p") ;
-         pDom.textContent = "Menu " +(i+1) ;
-         pDom.onclick = function(){
-		   Model.UI.audioDom.currentTime = i * 200 ;
-		 };
-         Model.UI.stageDom.appendChild(pDom);
-	  }
-	
-	};
-	 Model.removeAudioMenu = function(){
-	  let pDom ;
-	      pDom = document.querySelectorAll("div#stage p")
-	  for(let i=0;i<6;i++){
-	    
-         Model.UI.stageDom.removeChild(pDom[i]);
-	  }
-	
-	};
-//--------------------------------------------------
-  
-
-    // Model 
-  Model.init = function(){
-	Model.UI.videoDom.src = Model.UI.videoDom.getURL(0);
-    Model.UI.audioDom.src = Model.UI.audioDom.getURL(0);
-	
-	 // 第七次作业更新任务3— — — —实时视频时间
-   
-	// 第八次作业更新任务1.— — — —将实时播放视频时间放入div中
-    window.setInterval(function () {
-        Model.showTimeUI();
-    }, 1000);
-    // 定义向前按钮
-  
-	Model.UI.preDom.onclick = function () {
-        // 定义局部变量
-        let i = Model.i;
-        let length = null;
-        let file = null;
-        // 判断是视频文件还是音频文件
-        if (Model.isVideo) {
-            length = Model.UI.videoDom.videoLength;
-            file = Model.UI.videoDom;
-        }
-        else {
-            length = Model.UI.audioDom.audioLength;
-            file = Model.UI.audioDom;
-        }
-        // 业务处理
-        if (i == 0) {
-            i = length - 1;
-        }
-        else {
-            i--;
-        }
-        // 2.4 — — — —每次切换视频需要更新目录内容
-        Model.fileList(i);
-        Model.i = i;
-        file.src = file.getURL();
-        file.play();
-    }
-    // 定义播放按钮
-    Model.UI.playDom.onclick = function () {
-        if (Model.isVideo) {
-            Model.UI.videoDom.play();
-        } else {
-            Model.UI.audioDom.play();
-        }
-
-    };
-    // 定义暂停按钮
-    Model.UI.stopDom.onclick = function () {
-
-        if (Model.isVideo) {
-            Model.UI.videoDom.pause();
-        } else {
-            Model.UI.audioDom.pause();
-        }
-    }
-    // 定义向后按钮
-    Model.UI.nextDom.onclick = function () {
-        // 定义局部变量
-        let i = Model.i;
-        let length = null;
-        let file = null;
-        // 判断是视频文件还是音频文件
-        if (Model.isVideo) {
-            length = Model.UI.videoDom.videoLength;
-            file = Model.UI.videoDom;
-        }
-        else {
-            length = Model.UI.audioDom.audioLength;
-            file = Model.UI.audioDom;
-        }
-        // 业务处理
-        if (i == length - 1) {
-            i = 0;
-        }
-        else {
-            i++;
-        }
-        // 2.4 — — — —每次切换视频需要更新目录内容
-        Model.showMediaNum(i);
-        Model.i = i;
-        file.src = file.getURL();
-        file.play();
-    };
-
-
-
-    // 切换媒体
-    Model.UI.switchDom.onclick = function () {
-       
-        if (Model.isVideo) {
-            Model.UI.switchDom.value = "Audio";
-			
-			Model.createAudioMenu();
-        }
-        else {
-            Model.UI.switchDom.value = "Video";
-
-			Model.removeAudioMenu();
-        }
-        
-		Model.switchMediaDom(); 
-		
-		Model.isVideo = !Model.isVideo;
-        Model.i = 0;
-  
-        Model.showMediaNum(Model.i);
-    };
-
-
-	}; //Model.init 结束
-
-    
-
- Model.init() ;
- 
-</script>
-
+ <head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+  <style> 
+  body{
+	background-color:#eaeaef;
+  }
+ h1{
+	text-align:center;
+      font-size: 35px;
+      color: white;
+      font-style:italic;
+      font-family: 微软雅黑;
+ }
+	input{
+	text-align:center;
+	border:2px inset cyan;
+	border-radius:12px;
+	padding:20px;
+	box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	font-size:30px;
+	margin:20px;
+	}
+	input:hover{
+		box-shadow:0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+	}
+  </style>
+ </head>
+ <body>
+ <h1>大三上学期web作业库</h1>
+    <input type="submit" value="第一次作业" onclick="" >
+	<input type="submit" value="第二次作业" onclick="" >
+	<input type="submit" value="第三次作业" onclick="" >
+	<input type="submit" value="第四次作业" onclick="" >
+	<input type="submit" value="第五次作业" onclick="" >
+	<input type="submit" value="第六次作业" onclick="" >
+	<input type="submit" value="第七次作业" onclick="" >
+	<input type="submit" value="第八次作业" onclick="" >
+	<input type="submit" value="第九次作业" onclick="" >
+	<input type="submit" value="第十次作业" onclick="" >
+ </body>
 </html>
