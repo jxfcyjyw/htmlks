@@ -1,0 +1,171 @@
+《入门bash》
+基础知识：
+1.Gti-bash的安装以及一些基本运用。
+2.cd /（根，就是一个底的感觉，/代表根目录）。
+3.cd ..(返回上一目录)。
+4.ls(list)显示当前目录的文件及文件类型。
+5.less显示文件全部的信息，包括文件内部的。
+6.mkdir + 姓名(你取的名字) /（创建文件夹）。
+7.cp + 地址 /* .(*代表全部，.代表当前目录，..上级目录)。
+8.touch(创建文件)。
+9.rm删除文件，-rm与-rf文件夹（运用循环递进删除文件夹，不需要二次确定）。
+10.mv用于文件的移动与重命名。
+11.cp复制文件（cp -rA/*B）将A文件夹下的所有子文件、目录加到B文件夹中。
+12.echo（追加内容）。
+13.vim分为：命令模式和编辑模式，在编辑模式里面可以对文件进行更改，相当于文本编辑器。
+例子：
+cd /
+mkdir /
+mkdir yjw/
+ls /
+ls yjw/
+cp d:/照片/* .
+ls yjw/
+ls
+history
+ls
+rm
+rm --help
+rm/*.job
+rm/*.job .
+rm
+rm/1.jpg .
+rm yjw/
+rm yjw/*
+history
+cp d:/照片/* .
+history
+ls yjw/
+cp d:/照片/.
+cp d:/照片/* .
+is
+ls
+rm yjw/* .
+ls
+cp d:/照片/* .
+ls yjw/
+ls
+rm yjw/* .
+rm yjw/
+rm yjw/*
+rm -r yjw/
+ls
+mkdir yjw/
+ls
+history
+cp c:\Users\Lenovo\Pictures\Saved Pictures\ .
+cp c:\Users\Lenovo\Pictures\Saved Pictres
+mkrid yjw/
+ls yjw/
+ls
+rm yjw/
+rm -r yjw/
+ls
+mkdir yjw/
+ls
+cp c:/Users/Lenovo/Pictures/Saved pictures/* .
+cp c:/Users/Lenovo/Pictures/Saved Pictures/* .
+cp c:/Useres/Lenovo/Pictures/Saved Pictures/ .
+history
+ls
+cp d:/照片/* .
+ls
+cp d/照片/* . yjw/
+cp d/照片/* yjw/
+ls yjw
+rm yjw/1.webp
+ls yjw
+history >
+history>
+history > 20213581-20230906
+history > 20213582-2023-09-06
+rm Git/20213581-20230906
+rm 20213581-20230906
+ls
+rm 20213581-2023-09-06
+rm 20213581-2023-09-06
+rm 20213582-2023-09-06
+history > 20213581-2023-09-06.txt
+ls
+rm yjw -r
+ls
+history
+clear
+ls
+mkdir yjw/
+sl
+yjw/
+sl yjw/
+history
+sl
+ls
+mov yjw/,1.webp
+mv yjw,1.webp
+mv --help yjw,1.webp
+mv --yjw,1.webp
+mv:--yjw,1.webp
+mv yjw/ 1.webp/
+mv yjw/1.webp/
+mv 1.webp/yjw/
+mv1.webp/yjw
+mv 1.webp yjw
+ls yjw
+mv 2.webp 1.webp
+mv 1 2
+mv 2.webp 1.webp
+mv 2 1
+mv 1.webp/ 1.webp/
+mv 1.webp 2.webp
+mv 2.webp 1.webp
+ls
+ls yjw/
+cd yjw/
+mv 1.webp 2.webp
+touch 1.txt
+ls yjw
+ls yjw/
+ls
+/..
+cd..
+cd ..
+ls
+cat
+cd /
+ls
+cd yjw/
+ls
+rm 1.txt
+yjw/
+ls
+2.webp
+rm 2.webp
+ls
+cd ..
+ls
+rm -r yjw
+ls
+touch yjw/
+medir yjw/
+medir yjw/
+mkdir yjw
+cd yjw/
+touch 1.txt
+echo"liujiashu">>yjw
+cd ..
+echo "liujiashu" >>yjw
+echo"liujiashu">>yjw/
+ls
+echo "ljs">>1.txt
+ls 1.txt
+less 1.txt
+mv 1.txt yjw
+cd yjw/
+ls
+mv 2.txt 1.txt
+mv 1.txt 2.txt
+echo "每天开心">>2.txt
+less 2.txt
+vim
+vim 2.txt
+less 2.txt
+history
